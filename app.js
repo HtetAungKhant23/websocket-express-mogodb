@@ -23,9 +23,9 @@ io.on("connection", (socket) => {
         console.log('message from form = ', msg);
         io.emit('chat message', msg);
     })
-    socket.on('disconnect', (socket) => {
-        console.log('user is successfully disconnected');
-    })
+    // socket.on('disconnect', (socket) => {
+    //     console.log('user is successfully disconnected');
+    // })
 });
 
 server.listen(process.env.PORT, () => {
