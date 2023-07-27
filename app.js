@@ -18,6 +18,9 @@ app.get('/', (req, res, next) => {
 
 io.on("connection", (socket) => {
     console.log("user is successfully connected...");
+    socket.on('disconnect', (socket) => {
+        console.log('user is successfully disconnected');
+    })
 });
 
 server.listen(process.env.PORT, () => {
