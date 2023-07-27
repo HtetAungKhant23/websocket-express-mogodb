@@ -17,6 +17,7 @@
   </head>
   
   <body>
+    <p id="welcome"></p>
     <ul id="messages"></ul>
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
@@ -26,7 +27,7 @@
     <script>
       var socket = io();
 
-      var messges = document.getElementById('messgaes');
+      var messages = document.getElementById('messgaes');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
 
@@ -36,6 +37,11 @@
           socket.emit('chat message', input.value);
           input.value = '';
         }
+      });
+
+      socket.on('welcome message', (msg) => {
+        var item = document.getElementById('welcome');
+        item.textContent = msg;
       });
 
       socket.on('chat message', (msg) => {

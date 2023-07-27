@@ -17,12 +17,18 @@ app.get('/', (req, res, next) => {
 });
 
 io.on("connection", (socket) => {
-    socket.broadcast.emit('hi');
+    // socket.broadcast.emit('hello world');
+
+    io.emit('welcome message', "welcome user....");
+    
     console.log("user is successfully connected...");
+
     socket.on('chat message', (msg) => {
         console.log('message from form = ', msg);
         io.emit('chat message', msg);
     })
+
+
     // socket.on('disconnect', (socket) => {
     //     console.log('user is successfully disconnected');
     // })
