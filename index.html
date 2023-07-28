@@ -31,17 +31,20 @@
       const form = document.getElementById('form');
       const input = document.getElementById('input');
 
+      let currentUserName = '';
+
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         if(input.value){
-          socket.emit('chat message', input.value);
+          socket.emit('chat message', currentUserName,input.value);
           input.value = '';
         }
       });
 
-      socket.on('welcome message', (msg) => {
+      socket.on('welcome message', (msg,name) => {
+        currentUserName = name+': ';
         const wel = document.getElementById('welcome');
-        wel.textContent = msg;
+        wel.textContent = msg+name;
       });
 
       socket.on('chat message', (msg) => {

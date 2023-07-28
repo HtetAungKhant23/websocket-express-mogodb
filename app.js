@@ -16,12 +16,14 @@ app.get('/', (req, res, next) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-io.on("connection", (socket) => {
-    // socket.broadcast.emit('hello world');
+let count = 0;
 
-    io.emit('welcome message', "welcome user....");
-    
-    console.log("user is successfully connected...");
+io.on("connection", (socket) => {
+    count++;
+    let name = "user" + " " + count;
+    io.emit('welcome message', `welcome user....`, `${name}`);
+
+    console.log(name," is successfully connected...");
 
     socket.on('chat message', (msg) => {
         console.log('message from form = ', msg);
